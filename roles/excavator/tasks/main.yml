@@ -9,3 +9,8 @@
     state: present
   with_items:
     - excavator
+
+- name: enable excavator service
+  systemd:
+    name: excavator
+    enabled: true
