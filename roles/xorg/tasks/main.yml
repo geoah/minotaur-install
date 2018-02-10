@@ -1,4 +1,11 @@
 ---
+- name: install packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - xorg-x11-drv-evdev
+
 - name: copy xorg-setup.py
   copy:
     src: xorg-setup.py
