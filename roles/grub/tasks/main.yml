@@ -1,0 +1,9 @@
+---
+- name: disable active-state power management
+  shell: grubby --update-kernel=ALL --args="pcie_aspm=off"
+
+- name: verbose boot
+  shell: grubby --update-kernel=ALL --remove-args="rhgb quiet"
+
+- name: generate configuration
+  shell: grub2-mkconfig -o /boot/efi/EFI/centos/grub.cfg
