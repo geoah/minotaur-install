@@ -1,1 +1,1 @@
-/usr/bin/sudo -u minotaur minotaur --stats
+/usr/bin/sudo -u minotaur minotaur --stats "$@"
