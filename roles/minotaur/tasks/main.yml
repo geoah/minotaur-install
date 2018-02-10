@@ -10,9 +10,6 @@
   template: 
     src: minotaur.conf.j2
     dest: /etc/minotaur.conf
-#  copy:
-#    src: minotaur.conf
-#    dest: /etc/minotaur.conf
     owner: root
     group: root
     mode: 0644
@@ -20,14 +17,17 @@
 - name: install minotaur convenience commands
   copy:
     src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    dest: "/usr/local/bin"
     owner: root
     group: root
     mode: 0755
   with_items:
-    - { src: 'gs', dest: '/usr/local/bin' }
-    - { src: 'stats', dest: '/usr/local/bin' }
-    - { src: 'algos', dest: '/usr/local/bin' }
+    - { src: 'gs' }
+    - { src: 'stats' }
+    - { src: 'algos' }
+    - { src: 'min' }
+    - { src: 'fan' }
+    - { src: 'exv' }
 
 #- name: enable minotaur service
 #  systemd:

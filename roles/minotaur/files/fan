@@ -1,0 +1,1 @@
+tail -f /var/log/fanotaur/fanotaur.log -n500
