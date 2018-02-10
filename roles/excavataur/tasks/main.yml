@@ -17,4 +17,4 @@
 - name: enable excavataur service
   systemd:
     name: excavataur
-    enabled: True
+    enabled: true
