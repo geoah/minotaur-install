@@ -3,8 +3,8 @@ pools:
   nicehash:
     enable: true
     primary_region: eu
-    user: 3NnmeCSg3EZ9uooeMExgPJzmup5RStD3JH
-    worker_name: midas
+    user: {{ nicehash_wallet }}
+    worker_name: {{ worker_name }}
     append_device_id_to_worker_name: true
     timeout: 3
     default_algorithm: equihash
@@ -14,8 +14,8 @@ pools:
     failover_region: us
     block_reward: 3.52275
     # make sure this is in quotes or it will be interpreted as a long
-    user: "1BcAaB553c140612E4D33D342f4D1A26779Ce282"
-    worker_name: midas
+    user: "{{ethermine_wallet}}"
+    worker_name: {{ worker_name }}
     append_device_id_to_worker_name: true
     timeout: 3
 # % benefit to switch for, 0.04 means 4%
@@ -118,8 +118,8 @@ live_data:
 # a running xorg display is required for changing power limits and
 # clock frequencies
 xorg_display_no: 0
-electricity_per_kwh: 1.71
-electricity_currency: DKK
+electricity_per_kwh: {{ electricity_per_kwh }}
+electricity_currency: {{ electricity_currency }}
 
 # calibration settings, see README
 calibration:
@@ -150,4 +150,4 @@ stats:
   algos_file: /var/log/minotaur/algorithms.csv
   max_size_mb: 10
   max_file_count: 7
-donation_level: 1
+donation_level: {{ donation_level }}

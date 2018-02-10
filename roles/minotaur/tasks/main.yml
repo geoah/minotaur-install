@@ -7,9 +7,12 @@
     - minotaur
 
 - name: install minotaur config
-  copy:
-    src: minotaur.conf
+  template: 
+    src: minotaur.conf.j2
     dest: /etc/minotaur.conf
+#  copy:
+#    src: minotaur.conf
+#    dest: /etc/minotaur.conf
     owner: root
     group: root
     mode: 0644

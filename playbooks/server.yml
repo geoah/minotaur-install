@@ -3,8 +3,41 @@
   hosts: all
   become: true
 
+  vars_prompt:
+  - name: "worker_name"
+    prompt: "Worker name"
+    default: "minotaur"
+    private: no
+
+  - name: "nicehash_wallet"
+    prompt: "Nicehash Wallet"
+    default: "3CypS5xQSiPW5vtXpB7yiwdBnY3xoyEBeM"
+    private: no
+
+  - name: "ethermine_wallet"
+    prompt: "Ethermine wallet"
+    default: "0x15cc0929973A897b5F9487B12a69de2833CB6375"
+    private: no
+
+  - name: "electricity_currency"
+    prompt: "Electricity currency"
+    default: "GBP"
+    private: no
+
+  - name: "electricity_per_kwh"
+    prompt: "Electricity per kWh"
+    default: "0.1194"
+    private: no
+
+  - name: "donation_level"
+    prompt: "Donation level"
+    default: 5
+    private: no
+
   roles:
   - system
+  - plymouth
+  - grub
   - xorg
   - nvidia
   - ccminer
