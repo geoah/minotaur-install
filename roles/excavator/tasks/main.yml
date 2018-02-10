@@ -1,8 +1,4 @@
 ---
-# Install fails if dir does not exist beforehand for some reason
-- name: Create directory
-  file: path=/opt/excavator state=directory
-
 - name: install excavator
   yum:
     name: "{{ item }}"
