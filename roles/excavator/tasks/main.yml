@@ -1,6 +1,6 @@
 ---
 # Install fails if dir does not exist beforehand for some reason
-- name: Creates directory
+- name: Create directory
   file: path=/opt/excavator state=directory
 
 - name: install excavator
