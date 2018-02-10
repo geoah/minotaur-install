@@ -4,14 +4,6 @@
     name: epel-release
     state: present
 
-- name: add mining tools repository
-  yum_repository:
-      name: mining tools
-      description: Mining Tools repository
-      baseurl: http://ftp.redsleeve.org/pub/misc/mining/RPMS/
-      gpgcheck: no
-      enabled: yes
-
 - name: install packages
   yum:
     name: "{{ item }}"

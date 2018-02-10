@@ -36,6 +36,7 @@
 
   roles:
   - system
+  - mining-repo
   - plymouth
   - grub
   - xorg
