@@ -1,0 +1,5 @@
+---
+- name: remove plymouth boot screen
+  yum:
+    name: plymouth
+    state: absent
