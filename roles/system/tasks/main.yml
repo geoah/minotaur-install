@@ -22,6 +22,7 @@
   - screen
   - pciutils
   - mc
+  - ack
 
 - name: yum update
   yum:
@@ -48,3 +49,15 @@
     regexp: '^%wheel'
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
     validate: visudo -cf %s
+
+- name: update /etc/environment
+  lineinfile:
+    create: yes
+    backup: yes
+    dest: /etc/environment
+    state: present
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  with_items:
+    - { regexp: '^LANG=', line: 'LANG=en_US.utf-8' }
+    - { regexp: '^LC_ALL=', line: 'LC_ALL=en_US.utf-8' }
