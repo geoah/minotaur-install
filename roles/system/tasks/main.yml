@@ -1,4 +1,12 @@
 ---
+- name: add mainline kernel repository
+  yum_repository:
+    name: mainline-kernel
+    description: Mainline Kernel
+    baseurl: http://ftp.redsleeve.org/pub/misc/kernel/x86-64/RPMS/
+    gpgcheck: no
+    enabled: yes
+
 - name: install epel
   yum:
     name: epel-release
