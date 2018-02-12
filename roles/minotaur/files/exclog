@@ -1,0 +1,1 @@
+/usr/bin/sudo -u root tail -f /var/log/excavator -n500 | ccze -o nolookups

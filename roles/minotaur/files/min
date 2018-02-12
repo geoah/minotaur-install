@@ -1,1 +1,0 @@
-tail -f /var/log/minotaur/minotaur.log -n500

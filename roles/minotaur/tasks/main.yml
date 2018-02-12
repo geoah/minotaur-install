@@ -25,9 +25,10 @@
     - { src: 'gs' }
     - { src: 'stats' }
     - { src: 'algos' }
-    - { src: 'min' }
-    - { src: 'fan' }
-    - { src: 'exv' }
+    - { src: 'minlog' }
+    - { src: 'fanlog' }
+    - { src: 'exvlog' }
+    - { src: 'excwraplog' }
 
 #- name: enable minotaur service
 #  systemd:

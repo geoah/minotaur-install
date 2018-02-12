@@ -23,6 +23,7 @@
   - pciutils
   - mc
   - ack
+  - ccze
 
 - name: yum update
   yum:
