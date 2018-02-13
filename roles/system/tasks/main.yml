@@ -33,6 +33,7 @@
   - ack
   - ccze
   - deltarpm
+  - htop
 
 - name: yum update
   yum:
