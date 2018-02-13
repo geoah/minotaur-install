@@ -31,3 +31,5 @@
     name: rssh
     state: started
     enabled: true
+
+# Requires: GatewayPorts yes in /etc/ssh/sshd_config
