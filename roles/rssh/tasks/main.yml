@@ -16,7 +16,7 @@
     ssh_key_comment: '{{ rssh_local_user }}@{{ ansible_hostname }} (rSSH)'
 
 - name: copy ssh key to remote server
-  shell: sshpass -p '{{ rssh_remote_ssh_pass }}' ssh-copy-id -p {{ rssh_remote_ssh_port }} -i /home/{{ rssh_local_user }}/.ssh/id_rsa {{ rssh_remote_ssh_user }}@{{ rssh_remote_ssh_host }}
+  shell: sshpass -p '{{ rssh_remote_ssh_pass }}' ssh-copy-id -o StrictHostKeyChecking=no -p {{ rssh_remote_ssh_port }} -i /home/{{ rssh_local_user }}/.ssh/id_rsa {{ rssh_remote_ssh_user }}@{{ rssh_remote_ssh_host }}
 
 - name: install service
   template: 
