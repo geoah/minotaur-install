@@ -48,7 +48,7 @@
   shell: /bin/systemctl set-default graphical.target
 
 - name: set tuned-adm throughput-performance
-  shell: /usr/sbin/tuned-adm throughput-performance
+  shell: /usr/sbin/tuned-adm profile throughput-performance
 
 - name: Make sure we have a 'wheel' group
   group:
