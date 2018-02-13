@@ -62,7 +62,7 @@
   - mining-repo
   - system
   - plymouth
-  - grub
+  #- grub
   - rssh
   - xorg
   - nvidia
