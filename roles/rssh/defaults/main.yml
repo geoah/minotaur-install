@@ -1,0 +1,5 @@
+rssh_local_user: rssh
+rssh_remote_ssh_port: 22
+rssh_remote_ssh_user: root
+rssh_remote_ssh_pass:
+rssh_remote_forward_port: 1022 

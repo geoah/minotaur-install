@@ -1,0 +1,33 @@
+---
+- name: install packages
+  yum:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - sshpass
+
+- name: 'create user ({{ rssh_local_user }})'
+  user:
+    name: '{{ rssh_local_user }}'
+    state: present
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+    ssh_key_comment: '{{ rssh_local_user }}@{{ ansible_hostname }} (rSSH)'
+
+- name: copy ssh key to remote server
+  shell: sshpass -p '{{ rssh_remote_ssh_pass }}' ssh-copy-id -p {{ rssh_remote_ssh_port }} -i /home/{{ rssh_local_user }}/.ssh/id_rsa {{ rssh_remote_ssh_user }}@{{ rssh_remote_ssh_host }}
+
+- name: install service
+  template: 
+    src: rssh.service.j2
+    dest: /usr/lib/systemd/system/rssh.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: enable service
+  systemd:
+    name: rssh
+    state: started
+    enabled: true

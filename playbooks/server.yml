@@ -4,41 +4,66 @@
   become: true
 
   vars_prompt:
-  - name: "worker_name"
-    prompt: "Worker name"
-    default: "minotaur"
+  - name: 'worker_name'
+    prompt: 'Worker name'
+    default: 'minotaur'
     private: no
 
-  - name: "nicehash_wallet"
-    prompt: "Nicehash Wallet"
-    default: "3CypS5xQSiPW5vtXpB7yiwdBnY3xoyEBeM"
+  - name: 'nicehash_wallet'
+    prompt: 'Nicehash Wallet'
+    default: '3CypS5xQSiPW5vtXpB7yiwdBnY3xoyEBeM'
     private: no
 
-  - name: "ethermine_wallet"
-    prompt: "Ethermine wallet"
-    default: "0x15cc0929973A897b5F9487B12a69de2833CB6375"
+  - name: 'ethermine_wallet'
+    prompt: 'Ethermine wallet'
+    default: '0x15cc0929973A897b5F9487B12a69de2833CB6375'
     private: no
 
-  - name: "electricity_currency"
-    prompt: "Electricity currency"
-    default: "GBP"
+  - name: 'electricity_currency'
+    prompt: 'Electricity currency'
+    default: 'GBP'
     private: no
 
-  - name: "electricity_per_kwh"
-    prompt: "Electricity per kWh"
-    default: "0.1194"
+  - name: 'electricity_per_kwh'
+    prompt: 'Electricity per kWh'
+    default: '0.1194'
     private: no
 
-  - name: "donation_level"
-    prompt: "Donation level"
+  - name: 'donation_level'
+    prompt: 'Donation level'
     default: 5
     private: no
 
+  - name: 'rssh_remote_ssh_host'
+    prompt: '[Reverse SSH] Remote SSH host'
+    default: 'dev.infoproducts.dk'
+    private: no
+
+  - name: 'rssh_remote_ssh_port'
+    prompt: '[Reverse SSH] Remote SSH port'
+    default: '22'
+    private: no
+
+  - name: 'rssh_remote_ssh_user'
+    prompt: '[Reverse SSH] Remote SSH user'
+    default: 'root'
+    private: no
+
+  - name: 'rssh_remote_ssh_pass'
+    prompt: '[Reverse SSH] Remote SSH password'
+    private: yes
+
+  - name: 'rssh_remote_forward_port'
+    prompt: '[Reverse SSH] Remote SSH forward port'
+    default: '1022'
+    private: no
+
   roles:
-  - system
   - mining-repo
+  - system
   - plymouth
   - grub
+  - rssh
   - xorg
   - nvidia
   - ccminer

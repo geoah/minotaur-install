@@ -1,0 +1,19 @@
+[Unit]
+Description=Reverse SSH Service
+After=network.target
+
+[Service]
+User={{ rssh_local_user }}
+ExecStart=/bin/ssh \
+    -NTC \
+    -o ServerAliveInterval=60 \
+    -o ExitOnForwardFailure=yes \
+    -o StrictHostKeyChecking=no \
+    -R {{ rssh_remote_forward_port }}:localhost:22 {{ rssh_remote_ssh_user }}@{{ rssh_remote_ssh_host }}
+
+# Restart every >2 seconds to avoid StartLimitInterval failure
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
