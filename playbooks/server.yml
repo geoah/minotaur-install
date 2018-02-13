@@ -4,34 +4,34 @@
   become: true
 
   vars_prompt:
-  - name: 'worker_name'
-    prompt: 'Worker name'
+  - name: 'minotaur_worker_name'
+    prompt: '[Minotaur] Worker name'
     default: 'minotaur'
     private: no
 
-  - name: 'nicehash_wallet'
-    prompt: 'Nicehash Wallet'
-    default: '3CypS5xQSiPW5vtXpB7yiwdBnY3xoyEBeM'
+  - name: 'minotaur_nicehash_address'
+    prompt: '[Minotaur] Nicehash BTC address'
+    default: '3NnmeCSg3EZ9uooeMExgPJzmup5RStD3JH'
     private: no
 
-  - name: 'ethermine_wallet'
-    prompt: 'Ethermine wallet'
-    default: '0x15cc0929973A897b5F9487B12a69de2833CB6375'
+  - name: 'minotaur_ethereum_address'
+    prompt: '[Minotaur] Ethereum address'
+    default: '0x1BcAaB553c140612E4D33D342f4D1A26779Ce282'
     private: no
 
-  - name: 'electricity_currency'
-    prompt: 'Electricity currency'
-    default: 'GBP'
+  - name: 'minotaur_zcash_address'
+    prompt: '[Minotaur] Zcash address'
+    default: 't1VBL7Ni4CpCkkmiFxaRM33i4cqiLzbWV95'
     private: no
 
-  - name: 'electricity_per_kwh'
-    prompt: 'Electricity per kWh'
-    default: '0.1194'
+  - name: 'minotaur_currency'
+    prompt: '[Minotaur] Currency'
+    default: 'DKK'
     private: no
 
-  - name: 'donation_level'
-    prompt: 'Donation level'
-    default: 5
+  - name: 'minotaur_electricity_cost_per_kwh'
+    prompt: '[Minotaur] Electricity cost/kWh'
+    default: '1.75'
     private: no
 
   - name: 'rssh_remote_ssh_host'

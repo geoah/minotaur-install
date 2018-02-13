@@ -1,7 +1,7 @@
 ---
 - name: install minotaur
   yum:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
   with_items:
     - minotaur
@@ -16,8 +16,8 @@
 
 - name: install minotaur convenience commands
   copy:
-    src: "{{ item.src }}"
-    dest: "/usr/local/bin"
+    src: '{{ item.src }}'
+    dest: '/usr/local/bin'
     owner: root
     group: root
     mode: 0755
@@ -27,7 +27,7 @@
     - { src: 'algos' }
     - { src: 'minlog' }
     - { src: 'fanlog' }
-    - { src: 'exvlog' }
+    - { src: 'exclog' }
     - { src: 'excwraplog' }
 
 #- name: enable minotaur service

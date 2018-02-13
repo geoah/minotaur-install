@@ -3,8 +3,8 @@ pools:
   nicehash:
     enable: true
     primary_region: eu
-    user: {{ nicehash_wallet }}
-    worker_name: {{ worker_name }}
+    user: {{ minotaur_nicehash_address }}
+    worker_name: {{ minotaur_worker_name }}
     append_device_id_to_worker_name: true
     timeout: 3
     default_algorithm: equihash
@@ -14,10 +14,22 @@ pools:
     failover_region: us
     block_reward: 3.52275
     # make sure this is in quotes or it will be interpreted as a long
-    user: "{{ethermine_wallet}}"
-    worker_name: {{ worker_name }}
+    user: '{{ minotaur_ethereum_address }}'
+    worker_name: {{ minotaur_worker_name }}
     append_device_id_to_worker_name: true
     timeout: 3
+    pool_fee: 1
+  flypool:
+    enable: true
+    primary_region: eu
+    failover_region: us
+    block_reward: 12.5
+    user: {{ minotaur_zcash_address }}
+    worker_name: {{ minotaur_worker_name }}
+    append_device_id_to_worker_name: true
+    timeout: 3
+    default_algorithm: equihash
+    pool_fee: 1
 # % benefit to switch for, 0.04 means 4%
 profit_switch_threshold: 0.04
 # interval for the main loop, or how often to check everything and decide
@@ -83,13 +95,12 @@ device_profiles:
   default:
     algorithm: all
     device: all
-
 # example overclock for 1080ti running all algorithms
 #  1080ti_oc:
 #    algorithm: all
 #    device: 1080ti
-#    gpu_clock_offset: 115
-#    memory_clock_offset: 1550
+#    gpu_clock_offset: 105
+#    memory_clock_offset: 1500
 
 # example device classes
 #device_classes:
@@ -100,7 +111,7 @@ device_profiles:
 #    - 2
 #    - 3
 
-debug: false
+debug: true
 logging:
   log_file: /var/log/minotaur/minotaur.log
   calibration_log_dir: /var/log/minotaur
@@ -111,25 +122,29 @@ live_data:
     - 900
     - 3600
     - 86400
+    - 604800
   power_draw_averages:
     - 300
     - 600
     - 900
+    - 86400
+    - 604800
+
 # a running xorg display is required for changing power limits and
 # clock frequencies
 xorg_display_no: 0
-electricity_per_kwh: {{ electricity_per_kwh }}
-electricity_currency: {{ electricity_currency }}
+electricity_per_kwh: {{ minotaur_electricity_cost_per_kwh }}
+electricity_currency: {{ minotaur_currency }}
 
 # calibration settings, see README
 calibration:
-  hashrate_stabilisation_timeout_mins: 10
-  hashrate_stabilisation_tolerance: 0.5
+  hashrate_stabilisation_timeout_mins: 15
+  hashrate_stabilisation_tolerance: 2.5
   hashrate_stabilisation_consecutive_readings_required: 5
   algorithm_start_timeout: 180
   power_tuning:
     enable: true
-    decrement_watts: 10
+    decrement_watts: 2
 # acceptable loss should be at least 2x hashrate_stabilisation_tolerance
     acceptable_loss_percent: 1
 # if enabled any stable run of an algorithm over 2 mins will update the
@@ -150,4 +165,4 @@ stats:
   algos_file: /var/log/minotaur/algorithms.csv
   max_size_mb: 10
   max_file_count: 7
-donation_level: {{ donation_level }}
+donation_level: 1
