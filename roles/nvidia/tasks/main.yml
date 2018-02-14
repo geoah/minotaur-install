@@ -1,7 +1,7 @@
 ---
 - name: install packages
   yum:
-    name: "http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/{{ item }}"
+    name: 'http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/{{ item }}'
     state: present
     allow_downgrade: true
   with_items:
@@ -16,7 +16,27 @@
 - name: disable nvidia package updates
   lineinfile:
     dest: /etc/yum.conf
-    line: "exclude=nvidia-kmod,xorg-x11-drv-nvidia-*,cuda-drivers-*"
+    line: 'exclude=nvidia-kmod,xorg-x11-drv-nvidia-*,cuda-drivers-*'
+
+- name: 'create user ({{ nvidia_user }})'
+  user:
+    name: '{{ nvidia_user }}'
+    state: present
+    createhome: no
+
+- name: install nvidia persistenced service
+  template:
+    src: nvidia-persistenced.service.j2
+    dest: /usr/lib/systemd/system/nvidia-persistenced.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: enable nvidia persistenced service
+  systemd:
+    name: nvidia-persistenced
+    state: started
+    enabled: true
 
 - name: make nvidia-smi +s
   file:

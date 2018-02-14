@@ -1,0 +1,12 @@
+[Unit]
+Description=NVIDIA Persistenced Daemon
+Wants=syslog.target
+
+[Service]
+User={{ nvidia_user }}
+Type=forking
+ExecStart=/usr/bin/nvidia-persistenced
+ExecStopPost=/bin/rm -rf /var/run/nvidia-persistenced
+
+[Install]
+WantedBy=multi-user.target
