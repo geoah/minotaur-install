@@ -6,29 +6,29 @@
   with_items:
     - sshpass
 
-- name: 'create user ({{ rssh_local_user }})'
+- name: 'create daemon user ({{ rssh_daemon_user }})'
   user:
-    name: '{{ rssh_local_user }}'
+    name: '{{ rssh_daemon_user }}'
     state: present
     generate_ssh_key: yes
     ssh_key_bits: 2048
     ssh_key_file: .ssh/id_rsa
-    ssh_key_comment: '{{ rssh_local_user }}@{{ ansible_hostname }} (rSSH)'
+    ssh_key_comment: '{{ rssh_daemon_user }}@{{ ansible_hostname }} (rSSH)'
 
 - name: copy ssh key to remote server
-  shell: sshpass -p '{{ rssh_remote_ssh_pass }}' ssh-copy-id -o StrictHostKeyChecking=no -p {{ rssh_remote_ssh_port }} -i /home/{{ rssh_local_user }}/.ssh/id_rsa {{ rssh_remote_ssh_user }}@{{ rssh_remote_ssh_host }}
+  shell: sshpass -p '{{ rssh_remote_pass }}' ssh-copy-id -o StrictHostKeyChecking=no -p {{ rssh_remote_port }} -i /home/{{ rssh_daemon_user }}/.ssh/id_rsa {{ rssh_remote_user }}@{{ rssh_remote_host }}
 
 - name: install service
-  template: 
-    src: rssh.service.j2
-    dest: /usr/lib/systemd/system/rssh.service
+  template:
+    src: rsshd.service.j2
+    dest: /usr/lib/systemd/system/rsshd.service
     owner: root
     group: root
     mode: 0644
 
 - name: enable service
   systemd:
-    name: rssh
+    name: rsshd
     state: started
     enabled: true
 

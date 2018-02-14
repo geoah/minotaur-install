@@ -1,0 +1,18 @@
+[Unit]
+Description=Reverse SSH Tunnel Service
+After=network-online.target
+
+[Service]
+User={{ rssh_daemon_user }}
+ExecStart=/bin/ssh \
+    -NTC \
+    -o ServerAliveInterval=60 \
+    -o ExitOnForwardFailure=yes \
+    -o StrictHostKeyChecking=no \
+    -R {{ rssh_remote_forward_port }}:localhost:22 {{ rssh_remote_user }}@{{ rssh_remote_host }}
+
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

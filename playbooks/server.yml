@@ -34,28 +34,28 @@
     default: '1.75'
     private: no
 
-  - name: 'rssh_remote_ssh_host'
+  - name: 'rssh_remote_host'
     prompt: '[Reverse SSH] Remote SSH host'
-    default: 'dev.infoproducts.dk'
+    default: 'miners.infoproducts.dk'
     private: no
 
-  - name: 'rssh_remote_ssh_port'
+  - name: 'rssh_remote_port'
     prompt: '[Reverse SSH] Remote SSH port'
     default: '22'
     private: no
 
-  - name: 'rssh_remote_ssh_user'
+  - name: 'rssh_remote_user'
     prompt: '[Reverse SSH] Remote SSH user'
-    default: 'root'
+    default: 'rssh'
     private: no
 
-  - name: 'rssh_remote_ssh_pass'
+  - name: 'rssh_remote_pass'
     prompt: '[Reverse SSH] Remote SSH password'
     private: yes
 
   - name: 'rssh_remote_forward_port'
     prompt: '[Reverse SSH] Remote SSH forward port'
-    default: '1022'
+    default: '2022'
     private: no
 
   roles:
