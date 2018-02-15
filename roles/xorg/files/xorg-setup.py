@@ -6,7 +6,7 @@ import sys
 
 devices = []
 
-for line in os.popen("lspci |grep 'VGA compatible controller: NVIDIA Corporation'").read().rstrip().split("\n"):
+for line in os.popen("lspci -Q |grep 'VGA compatible controller: NVIDIA Corporation'").read().rstrip().split("\n"):
   match = re.match("^(.*?) VGA compatible controller: NVIDIA Corporation (.*?) \[(.*?)\]", line)
 
   if match:
