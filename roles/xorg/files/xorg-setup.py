@@ -10,7 +10,7 @@ for line in os.popen("lspci -Q |grep 'VGA compatible controller: NVIDIA Corporat
   match = re.match("^(.*?) VGA compatible controller: NVIDIA Corporation (.*?) \[(.*?)\]", line)
 
   if match:
-    pci0 = int(match.group(1).split(':')[0])
+    pci0 = match.group(1).split(':')[0]
     pci1 = int(match.group(1).split(':')[1].split('.')[0])
     pci2 = int(match.group(1).split(':')[1].split('.')[1])
 
@@ -46,7 +46,7 @@ with open("/etc/X11/xorg.conf","w") as f:
     f.write("    Option          \"NoLogo\" \"1\"\n")
     f.write("    Option          \"Coolbits\" \"28\"\n")
     f.write("    Option          \"RegistryDwords\" \"PowerMizerEnable=0x1; PerfLevelSrc=0x2222; PowerMizerDefaultAC=0x1\"\n")
-    f.write("    BusID           \"PCI:%d:%d:%d\"\n" % (devices[i]['pci0'], devices[i]['pci1'], devices[i]['pci2']))
+    f.write("    BusID           \"PCI:%s:%d:%d\"\n" % (devices[i]['pci0'], devices[i]['pci1'], devices[i]['pci2']))
     f.write("EndSection\n")
 
   for i in range(0, len(devices)):
