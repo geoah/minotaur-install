@@ -1,4 +1,12 @@
 ---
+- name: create /var/run/gpustatd
+  file:
+    path: /var/run/gpustatd
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
 - name: install gpustatd
   yum:
     name: "{{ item }}"
