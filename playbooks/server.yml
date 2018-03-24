@@ -6,32 +6,32 @@
   vars_prompt:
   - name: 'minotaur_worker_name'
     prompt: '[Minotaur] Worker name'
-    default: 'minotaur'
+    default: 'm1'
     private: no
 
   - name: 'minotaur_nicehash_address'
     prompt: '[Minotaur] Nicehash BTC address'
-    default: '3NnmeCSg3EZ9uooeMExgPJzmup5RStD3JH'
+    default: '3M6MEzqSzHt3h3CbHRFfhBj9CaZ8tP7k1J'
     private: no
 
   - name: 'minotaur_ethereum_address'
     prompt: '[Minotaur] Ethereum address'
-    default: '0x1BcAaB553c140612E4D33D342f4D1A26779Ce282'
+    default: '0x3bc0C83C285e8ea62a244586D6000525700A8cc7'
     private: no
 
   - name: 'minotaur_zcash_address'
     prompt: '[Minotaur] Zcash address'
-    default: 't1VBL7Ni4CpCkkmiFxaRM33i4cqiLzbWV95'
+    default: 't1W7EGwuPJgux7adQNxsijCorxENwsCwFbj'
     private: no
 
   - name: 'minotaur_currency'
     prompt: '[Minotaur] Currency'
-    default: 'DKK'
+    default: 'GBP'
     private: no
 
   - name: 'minotaur_electricity_cost_per_kwh'
     prompt: '[Minotaur] Electricity cost/kWh'
-    default: '1.75'
+    default: '0.2'
     private: no
 
   # - name: 'rssh_remote_host'
