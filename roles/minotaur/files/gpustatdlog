@@ -1,0 +1,1 @@
+tail -f /var/log/gpustatd/gpustatd.log -n500 | ccze -o nolookups
