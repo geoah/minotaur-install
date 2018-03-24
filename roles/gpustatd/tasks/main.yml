@@ -1,20 +1,20 @@
 ---
-- name: install gpustatsd
+- name: install gpustatd
   yum:
     name: "{{ item }}"
     state: present
   with_items:
-    - gpustatsd
+    - gpustatd
 
-- name: install gpustatsd config
+- name: install gpustatd config
   copy:
-    src: gpustatsd.conf
-    dest: /etc/gpustatsd.conf
+    src: gpustatd.conf
+    dest: /etc/gpustatd.conf
     owner: root
     group: root
     mode: 0644
 
-- name: enable gpustatsd service
+- name: enable gpustatd service
   systemd:
     name: excavator
     enabled: true
