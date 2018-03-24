@@ -7,6 +7,6 @@ yum -y install epel-release
 yum -y install python-pip
 yum -y install git
 pip install ansible
-git clone https://github.com/biesbjerg/minotaur-install.git
+git clone https://github.com/geoah/minotaur-install.git
 cd minotaur-install
 ansible-playbook -i 'localhost,' -c local playbooks/server.yml
