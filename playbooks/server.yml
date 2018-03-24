@@ -34,36 +34,36 @@
     default: '1.75'
     private: no
 
-  - name: 'rssh_remote_host'
-    prompt: '[Reverse SSH] Remote SSH host'
-    default: 'miners.infoproducts.dk'
-    private: no
+  # - name: 'rssh_remote_host'
+  #   prompt: '[Reverse SSH] Remote SSH host'
+  #   default: 'miners.infoproducts.dk'
+  #   private: no
 
-  - name: 'rssh_remote_port'
-    prompt: '[Reverse SSH] Remote SSH port'
-    default: '22'
-    private: no
+  # - name: 'rssh_remote_port'
+  #   prompt: '[Reverse SSH] Remote SSH port'
+  #   default: '22'
+  #   private: no
 
-  - name: 'rssh_remote_user'
-    prompt: '[Reverse SSH] Remote SSH user'
-    default: 'rssh'
-    private: no
+  # - name: 'rssh_remote_user'
+  #   prompt: '[Reverse SSH] Remote SSH user'
+  #   default: 'rssh'
+  #   private: no
 
-  - name: 'rssh_remote_pass'
-    prompt: '[Reverse SSH] Remote SSH password'
-    private: yes
+  # - name: 'rssh_remote_pass'
+  #   prompt: '[Reverse SSH] Remote SSH password'
+  #   private: yes
 
-  - name: 'rssh_remote_forward_port'
-    prompt: '[Reverse SSH] Remote SSH forward port'
-    default: '2022'
-    private: no
+  # - name: 'rssh_remote_forward_port'
+  #   prompt: '[Reverse SSH] Remote SSH forward port'
+  #   default: '2022'
+  #   private: no
 
   roles:
   - mining-repo
   - system
   - plymouth
   - grub
-  - rssh
+  # - rssh
   - xorg
   - nvidia
   - ccminer
