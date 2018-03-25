@@ -10,8 +10,8 @@
   copy:
     src: gpustatd.conf
     dest: /etc/gpustatd.conf
-    owner: root
-    group: root
+    owner: gpustatd
+    group: gpustatd
     mode: 0644
 
 - name: enable gpustatd service
