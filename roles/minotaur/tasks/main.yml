@@ -18,8 +18,8 @@
   file:
     path: /var/log/minotaur
     state: directory
-    owner: gpustatd
-    group: gpustatd
+    owner: minotaur
+    group: minotaur
     mode: 0755
 
 - name: install minotaur convenience commands
