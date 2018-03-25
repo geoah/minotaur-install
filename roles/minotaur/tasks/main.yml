@@ -1,4 +1,12 @@
 ---
+- name: create /var/run/minotaur
+  file:
+    path: /var/run/minotaur
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
 - name: install minotaur
   yum:
     name: '{{ item }}'
@@ -30,7 +38,7 @@
     - { src: 'exclog' }
     - { src: 'excwraplog' }
 
-#- name: enable minotaur service
-#  systemd:
-#    name: minotaur
-#    enabled: true
+- name: enable minotaur service
+ systemd:
+   name: minotaur
+   enabled: true
