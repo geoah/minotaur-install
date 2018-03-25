@@ -10,9 +10,17 @@
   copy:
     src: gpustatd.conf
     dest: /etc/gpustatd.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: create /var/log/gpustatd
+  file:
+    path: /var/log/gpustatd
+    state: directory
     owner: gpustatd
     group: gpustatd
-    mode: 0644
+    mode: 0755
 
 - name: enable gpustatd service
   systemd:

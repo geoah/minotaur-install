@@ -14,6 +14,14 @@
     group: root
     mode: 0644
 
+- name: create /var/log/minotaur
+  file:
+    path: /var/log/minotaur
+    state: directory
+    owner: gpustatd
+    group: gpustatd
+    mode: 0755
+
 - name: install minotaur convenience commands
   copy:
     src: '{{ item.src }}'
