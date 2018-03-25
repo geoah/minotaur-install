@@ -24,6 +24,11 @@
     default: 't1W7EGwuPJgux7adQNxsijCorxENwsCwFbj'
     private: no
 
+  - name: 'minotaur_monero_address'
+    prompt: '[Minotaur] Monero address'
+    default: 'who-the-hell-mines-monero'
+    private: no
+
   - name: 'minotaur_currency'
     prompt: '[Minotaur] Currency'
     default: 'GBP'

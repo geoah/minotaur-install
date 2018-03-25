@@ -3,38 +3,112 @@ pools:
   nicehash:
     enable: true
     primary_region: eu
-    user: {{ minotaur_nicehash_address }}
-    worker_name: {{ minotaur_worker_name }}
+    user: "{{ minotaur_nicehash_address }}"
+    worker_name: "{{ minotaur_worker_name }}"
     append_device_id_to_worker_name: true
     timeout: 3
     default_algorithm: equihash
+    pool_fee: 2
   ethermine:
-    enable: true
-    primary_region: eu
-    failover_region: us
-    block_reward: 3.52275
+    enable: false
+    shortname: em
+    endpoints:
+      - eu1.ethermine.org:4444
+      - us1.ethermine.org:4444
+    algorithm: daggerhashimoto
+    miners:
+    - ethminer
+    whattomine_coin_no: 151
     # make sure this is in quotes or it will be interpreted as a long
-    user: '{{ minotaur_ethereum_address }}'
-    worker_name: {{ minotaur_worker_name }}
+    user: "{{ minotaur_ethereum_address }}"
+    worker_name: "{{ minotaur_worker_name }}"
     append_device_id_to_worker_name: true
     timeout: 3
     pool_fee: 1
   flypool:
-    enable: true
-    primary_region: eu
-    failover_region: us
-    block_reward: 12.5
-    user: {{ minotaur_zcash_address }}
-    worker_name: {{ minotaur_worker_name }}
-    append_device_id_to_worker_name: true
+    enable: false
+    shortname: fp
+    endpoints:
+      - eu1-zcash.flypool.org:3333
+      - us1-zcash.flypool.org:3333
+    algorithm: equihash
+    miners:
+    - excavator
+    - ewbf
+    - ccminer
+    - ccminer2
+    whattomine_coin_no: 166
+    user: "{{ minotaur_zcash_address }}"
+    worker_name: "{{ minotaur_worker_name }}"
+    append_device_id_to_worker_name: false
+    timeout: 3
+    pool_fee: 1
+  moneroocean:
+    enable: false
+    shortname: mo
+    endpoints:
+    - gulf.moneroocean.stream:10004
+    algorithm: cryptonight
+    miners:
+    - excavator
+    - xmrig_nvidia
+    - ccminer
+    - ccminer2
+    whattomine_coin_no: 101
+    user: "{{ minotaur_monero_address }}"
+    worker_name: "{{ minotaur_worker_name }}"
+    append_device_id_to_worker_name: false
+    timeout: 3
+    pool_fee: 0
+  zclmine:
+    enable: false
+    shortname: zm
+    endpoints:
+    - eu.zclmine.pro:9009
+    algorithm: equihash
+    miners:
+    - excavator
+    - xmrig_nvidia
+    - ccminer
+    - ccminer2
+    whattomine_coin_no: 167
+    user: "{{ minotaur_zcash_address }}"
+    worker_name: "{{ minotaur_worker_name }}"
+    append_device_id_to_worker_name: false
+    timeout: 3
+    pool_fee: 0
+  miningpoolhub:
+    enable: false
+    user: geoah
     timeout: 3
     default_algorithm: equihash
-    pool_fee: 1
+# this will be 1.1 if you use auto-exchange
+    pool_fee: 0.9
+    hub_workers:
+      cryptonight: m001
+      equihash: m002
+      daggerhashimoto: m003
+      lyra2rev2: m004
+      neoscrypt: m005
+      keccak: m006
+      skein: m007
+      groestl: m008
+
 # % benefit to switch for, 0.04 means 4%
 profit_switch_threshold: 0.04
+
 # interval for the main loop, or how often to check everything and decide
 # whether we should switch algorithm
 refresh_interval: 15
+
+# how often to retrieve stats from pools (seconds)
+pool_refresh_interval: 300
+
+# when enabled set max power limit when transitioning from one algo to
+# another. if disabled the greater of the power limits associated with
+# the two algorithms will be used.
+use_max_power_limit_when_switching: true
+
 # comment algorithms in this list to disable them
 algorithms:
   single:
@@ -60,6 +134,8 @@ algorithms:
     - quark
     - blake256r8
     - skunk
+    - skein
+    - groestl
   double:
     - daggerhashimoto_pascal
     - daggerhashimoto_decred
@@ -73,24 +149,21 @@ algo_startup_timeout: 120
 algo_warmup_period_mins: 2
 # miners to use
 miners:
-  excavator:
-    enable: true
-    ip: 127.0.0.1
-    port: 3456
-    timeout: 10
   ccminer:
     enable: true
     port: 3457
     ip: 127.0.0.1
     timeout: 10
-  ccminer2:
-      enable: true
-      ip: 127.0.0.1
-      port: 3458
-  ethminer:
+  excavator:
     enable: true
     ip: 127.0.0.1
-    port: 3459
+    port: 3456
+    timeout: 10
+# example for 1070ti with excavator 1.4.4a
+    algo_params:
+      neoscrypt:
+        B: 720
+        M: 3
 device_profiles:
   default:
     algorithm: all
@@ -99,8 +172,12 @@ device_profiles:
 #  1080ti_oc:
 #    algorithm: all
 #    device: 1080ti
-#    gpu_clock_offset: 105
+#    gpu_clock_offset: 125
 #    memory_clock_offset: 1500
+
+# example restricting power for a device class to 250W
+#power_limit:
+#  1080ti: 250
 
 # example device classes
 #device_classes:
@@ -111,7 +188,7 @@ device_profiles:
 #    - 2
 #    - 3
 
-debug: true
+debug: false
 logging:
   log_file: /var/log/minotaur/minotaur.log
   calibration_log_dir: /var/log/minotaur
@@ -122,25 +199,24 @@ live_data:
     - 900
     - 3600
     - 86400
-    - 604800
   power_draw_averages:
     - 300
     - 600
     - 900
-    - 86400
-    - 604800
-
 # a running xorg display is required for changing power limits and
 # clock frequencies
 xorg_display_no: 0
-electricity_per_kwh: {{ minotaur_electricity_cost_per_kwh }}
-electricity_currency: {{ minotaur_currency }}
+electricity_per_kwh: 0.1194
+electricity_currency: GBP
+
+# how many watts the system uses other than GPUs
+system_draw_watts: 200
 
 # calibration settings, see README
 calibration:
-  hashrate_stabilisation_timeout_mins: 15
-  hashrate_stabilisation_tolerance: 2.5
-  hashrate_stabilisation_consecutive_readings_required: 5
+  hashrate_stabilisation_timeout_mins: 10
+  hashrate_stabilisation_tolerance: 0.5
+  hashrate_stabilisation_consecutive_readings_required: 6
   algorithm_start_timeout: 180
   power_tuning:
     enable: true
@@ -155,14 +231,11 @@ calibration:
 # value must be within 3-10% of the calibrated rate
   calibration_update_threshold_min_pc: 1
   calibration_update_threshold_max_pc: 10
-leave_graphics_clocks_alone: false
+leave_graphics_clocks_alone: true
 #ignore_devices: [3]
-regulate_card_temperatures: true
-card_temperature_limit: 80
 stats:
   enable: true
   stats_file: /var/log/minotaur/minotaur.csv
   algos_file: /var/log/minotaur/algorithms.csv
   max_size_mb: 10
   max_file_count: 7
-donation_level: 1
